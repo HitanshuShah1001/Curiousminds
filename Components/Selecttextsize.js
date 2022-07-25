@@ -8,13 +8,14 @@ export default function Selecttextsize() {
   const {
     titleSize,
     setTitleSize,
+    articleColor
   } = React.useContext(TextSizes);
 
   return(
-    <View style={{paddingHorizontal:15,marginTop:20}}><Text style={{fontSize:titleSize,fontWeight:'700' }}>Title Size</Text><Slider style={{ width: 200, height: 40 }}
+    <View style={{paddingHorizontal:15,marginTop:20}}><Text style={{fontSize:titleSize,fontWeight:'700',color:articleColor }}>Title Size</Text><Slider style={{ width: 200, height: 40 }}
           minimumValue={20}
           maximumValue={40}
-          minimumTrackTintColor="#000000"
-          maximumTrackTintColor="#000000" onValueChange={(value) => setTitleSize(value)}/></View>
+          minimumTrackTintColor={articleColor}
+          maximumTrackTintColor={articleColor} onValueChange={(value) => setTitleSize(value)}/></View>
   )
 }

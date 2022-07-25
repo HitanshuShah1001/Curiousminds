@@ -1,7 +1,6 @@
 import React,{useState} from "react";
 import { SafeAreaView, View, Text, Switch } from "react-native";
 import SettingsLabel from "../Components/Settings";
-import DropdownComponent from "../Components/Dropdown";
 import { TextSizes } from "../TextContext.js";
 import Selecttextsize from "../Components/Selecttextsize";
 import Selectauthorsize from "../Components/SelectAuthorsize";
