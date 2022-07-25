@@ -3,7 +3,9 @@ import { SafeAreaView, View, Text, Switch } from "react-native";
 import SettingsLabel from "../Components/Settings";
 import DropdownComponent from "../Components/Dropdown";
 import { TextSizes } from "../TextContext.js";
-
+import Selecttextsize from "../Components/Selecttextsize";
+import Selectauthorsize from "../Components/SelectAuthorsize";
+import Selectarticlesize from "../Components/SelectArticlesize";
 export default function Settings() {
   const {
     titleSize,
@@ -39,9 +41,9 @@ export default function Settings() {
     <SafeAreaView style={{ flex: 1, backgroundColor: pagecolor }}>
       <SettingsLabel />
       <View style={{ flex: 10 }}>
-        <DropdownComponent text="Title" />
-        <DropdownComponent text="Author" />
-        <DropdownComponent text="Article" />
+        <Selecttextsize />
+        <Selectauthorsize />
+        <Selectarticlesize />
         <View
           style={{
             flexDirection: "row",
@@ -50,10 +52,9 @@ export default function Settings() {
             marginTop: 10,
           }}
         >
-          <Text style={{ fontSize: 18, fontWeight: "600" }}>Dark Mode</Text>
+          <Text style={{ fontSize: 18, fontWeight: "600",color:articleColor }}>Dark Mode</Text>
           <Switch
             trackColor={{ false: "#767577", true: "#81b0ff" }}
-            ios_backgroundColor="#3e3e3e"
             onValueChange={changeTheme}
             value={on}
           />

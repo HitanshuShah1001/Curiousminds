@@ -4,8 +4,8 @@ import Settings from './Screens/Settings';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { TextSizes } from './TextContext';
-
-
+import { Articleicon } from './Components/Articleicon';
+import { Settingsicon } from './Components/Settingsicon';
 const Tab = createMaterialBottomTabNavigator();
 
 
@@ -20,9 +20,18 @@ export default function App() {
   return (
   <TextSizes.Provider value={values}>
     <NavigationContainer>
-    <Tab.Navigator barStyle={{backgroundColor:'white'}}>
-    <Tab.Screen name="Article" component={Article} />
-    <Tab.Screen name="Settings" component={Settings} />
+    <Tab.Navigator barStyle={{backgroundColor:'white'}} shifting={true} >
+    <Tab.Screen name="Article" component={Article}  options={{
+      tabBarIcon:() => {
+        return <Articleicon />
+      }
+    }}/>
+    <Tab.Screen name="Settings" component={Settings} 
+    options={{
+      tabBarIcon:() => {
+        return <Settingsicon />
+      }
+    }} />
     </Tab.Navigator>
     </NavigationContainer>
   </TextSizes.Provider>
