@@ -16,6 +16,7 @@ export default function Selectauthorsize() {
           minimumValue={14}
           maximumValue={24}
           minimumTrackTintColor={articleColor}
+          value={authortextSize}
           maximumTrackTintColor={articleColor} onValueChange={(value) => setAuthortextSize(value)}/></View>
   )
 }

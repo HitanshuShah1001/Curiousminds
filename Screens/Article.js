@@ -36,9 +36,18 @@ export default function Article() {
 
   const Speak = () => {
     SettoSpeak(true);
+    
     const thingtoSay = article;
     Speech.speak(thingtoSay);
+    Speech.isSpeakingAsync().then(res => {
+      console.log(res)
+    })
   };
+
+
+  const Pausespeech = () => {
+    Speech.pause()
+  }
 
   const getanother = () => {
     axios
@@ -64,7 +73,7 @@ export default function Article() {
         <Button title={`Read another`} onPress={getanother} />
         <Button title="Share " onPress={Sharearticle} />
       </View>
-      {tospeak && <View style={{ flexDirection: "row", flex: 0.3 }}></View>}
+      {tospeak && <View style={{ flexDirection: "row", flex: 0.3 }}><Button title="Pause" onPress={Pausespeech} /></View>}
       {article == "" && <ActivityIndicator size={"large"} />}
       {article != "" && (
         <ScrollView style={{ flex: 1.5 }}>

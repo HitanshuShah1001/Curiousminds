@@ -7,18 +7,12 @@ import Selectauthorsize from "../Components/SelectAuthorsize";
 import Selectarticlesize from "../Components/SelectArticlesize";
 export default function Settings() {
   const {
-    titleSize,
-    setTitleSize,
-    authortextSize,
-    setAuthortextSize,
     articleColor,
     setArticlecolor,
     theme,
     setTheme,
     pagecolor,
     setPagecolor,
-    articletextSize,
-    setArticletextSize,
   } = React.useContext(TextSizes);
   const [on, setOn] = useState(false);
 
@@ -48,7 +42,7 @@ export default function Settings() {
             flexDirection: "row",
             paddingHorizontal: 18,
             justifyContent: "space-between",
-            marginTop: 10,
+            marginTop: 20,
           }}
         >
           <Text style={{ fontSize: 18, fontWeight: "600",color:articleColor }}>Dark Mode</Text>
