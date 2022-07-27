@@ -15,10 +15,12 @@ import axios from "axios";
 import Divider from "../Components/Divider";
 import * as Speech from "expo-speech";
 import { TextSizes } from "../TextContext.js";
+import DropdownComponent from "../Components/Dropdowncomponent";
+
 export default function Article() {
   const { titleSize, authortextSize, articletextSize,articleColor,pagecolor } =
     React.useContext(TextSizes);
-  const [imagesource,setImagesource] = useState(require('../images/pause-button.png'))
+  const [imagesource,setImagesource] = useState(require('../images/pausebluee.png'))
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [article, setArticle] = useState("");
@@ -33,7 +35,7 @@ export default function Article() {
 
   const Sharearticle = () => {
     Speech.pause()
-    setImagesource(require('../images/play.png'))
+    setImagesource(require('../images/playblue.png'))
     Share.share({
       message: article.toString(),
     })
@@ -44,7 +46,7 @@ export default function Article() {
   const Speak = () => {
     SettoSpeak(true);
     const thingtoSay = article;
-    Speech.speak(thingtoSay,{language:"ar-SA"});
+    Speech.speak(thingtoSay,{rate:1,pitch:0.7});
     Speech.isSpeakingAsync().then(res => {
       console.log(res)
     })
@@ -53,19 +55,19 @@ export default function Article() {
 
 
   const CheckStatus = () => {
-    if(imagesource===require('../images/pause-button.png')){
-      setImagesource(require('../images/play.png'))
+    if(imagesource===require('../images/pausebluee.png')){
+      setImagesource(require('../images/playblue.png'))
       Speech.pause()
     }
     else{
-      setImagesource(require('../images/pause-button.png'))
+      setImagesource(require('../images/pausebluee.png'))
       Speech.resume()
     }
   }
 
   const getanother = () => {
     Speech.stop()
-    setImagesource(require('../images/pause-button.png'))
+    setImagesource(require('../images/pausebluee.png'))
     SettoSpeak(false);
     axios
       .get("https://curiousmindsbackend.herokuapp.com/article")
@@ -101,8 +103,10 @@ export default function Article() {
         <Pressable onPress={CheckStatus}>
           <Image source={imagesource} style={{height:25,width:25}} />
         </Pressable>
+        <DropdownComponent />
+        <DropdownComponent />
         <Pressable onPress={StopAudio}>
-          <Image source={require('../images/stop-button.png')} style={{height:35,width:35}} />
+          <Image source={require('../images/stop.png')} style={{height:25,width:25}} />
         </Pressable>
         </View>}
       {article == "" && <ActivityIndicator size={"large"} />}

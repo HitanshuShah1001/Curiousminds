@@ -16,7 +16,8 @@ export default function App() {
   const [theme,setTheme] = useState('Light')
   const [articleColor,setArticlecolor] = useState(theme=='Light'?'#000000':'#FFFFFF')
   const [pagecolor,setPagecolor] = useState(theme==='Light'?'#FFFFFF':'#000000')
-  values = {titleSize,setTitleSize,authortextSize,setAuthortextSize,articleColor,setArticlecolor,theme,setTheme,pagecolor,setPagecolor,articletextSize,setArticletextSize}
+  const [language,setLanguage] = useState('en-US')
+  values = {titleSize,setTitleSize,authortextSize,setAuthortextSize,articleColor,setArticlecolor,theme,setTheme,pagecolor,setPagecolor,articletextSize,setArticletextSize,language,setLanguage}
   return (
   <TextSizes.Provider value={values}>
     <NavigationContainer>
