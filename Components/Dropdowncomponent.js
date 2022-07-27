@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import { TextSizes } from "../TextContext.js";
 
 const data = [
   { label: 'Arabic ', value: 'ar-SA' },
@@ -29,8 +30,11 @@ const data = [
 ];
 
 const DropdownComponent = () => {
-  const [value, setValue] = useState(null);
+  const { language,setLanguage} =
+    React.useContext(TextSizes);
+  const [value, setValue] = useState(language);
   const [isFocus, setIsFocus] = useState(false);
+  
 
   return (
     <View style={styles.container}>
@@ -53,6 +57,7 @@ const DropdownComponent = () => {
         onChange={item => {
           setValue(item.value);
           setIsFocus(false);
+          setLanguage(item.value)
         }}
         
       />

@@ -18,20 +18,27 @@ import { TextSizes } from "../TextContext.js";
 import DropdownComponent from "../Components/Dropdowncomponent";
 
 export default function Article() {
-  const { titleSize, authortextSize, articletextSize,articleColor,pagecolor } =
+  const { titleSize, authortextSize, articletextSize,articleColor,pagecolor,language } =
     React.useContext(TextSizes);
+
   const [imagesource,setImagesource] = useState(require('../images/pausebluee.png'))
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [article, setArticle] = useState("");
   const [tospeak, SettoSpeak] = useState(false);
-  console.log(titleSize, authortextSize, articletextSize);
+  console.log(language,'langauge');
   useEffect(() => {
     getanother();
-    Speech.getAvailableVoicesAsync().then(res => {
-      console.log(res)
-    })
+    // Speech.getAvailableVoicesAsync().then(res => {
+    //   console.log(res)
+    // })
   }, []);
+
+  useEffect(() => {
+    Speech.stop()
+    Speech.speak(article,{language:language})
+    setImagesource(require('../images/pausebluee.png'))
+  },[language])
 
   const Sharearticle = () => {
     Speech.pause()
@@ -46,7 +53,7 @@ export default function Article() {
   const Speak = () => {
     SettoSpeak(true);
     const thingtoSay = article;
-    Speech.speak(thingtoSay,{rate:1,pitch:0.7});
+    Speech.speak(thingtoSay,{rate:1,pitch:0.7,language:language});
     Speech.isSpeakingAsync().then(res => {
       console.log(res)
     })
@@ -104,7 +111,7 @@ export default function Article() {
           <Image source={imagesource} style={{height:25,width:25}} />
         </Pressable>
         <DropdownComponent />
-        <DropdownComponent />
+        {/* <DropdownComponent /> */}
         <Pressable onPress={StopAudio}>
           <Image source={require('../images/stop.png')} style={{height:25,width:25}} />
         </Pressable>
