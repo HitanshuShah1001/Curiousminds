@@ -18,7 +18,7 @@ import { TextSizes } from "../TextContext.js";
 export default function Article() {
   const { titleSize, authortextSize, articletextSize,articleColor,pagecolor } =
     React.useContext(TextSizes);
-  const [imagesource,setImagesource] = useState(require('../images/pause.png'))
+  const [imagesource,setImagesource] = useState(require('../images/pause-button.png'))
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [article, setArticle] = useState("");
@@ -33,7 +33,7 @@ export default function Article() {
 
   const Sharearticle = () => {
     Speech.pause()
-    setImagesource(require('../images/play-button.png'))
+    setImagesource(require('../images/play.png'))
     Share.share({
       message: article.toString(),
     })
@@ -53,19 +53,19 @@ export default function Article() {
 
 
   const CheckStatus = () => {
-    if(imagesource===require('../images/pause.png')){
-      setImagesource(require('../images/play-button.png'))
+    if(imagesource===require('../images/pause-button.png')){
+      setImagesource(require('../images/play.png'))
       Speech.pause()
     }
     else{
-      setImagesource(require('../images/pause.png'))
+      setImagesource(require('../images/pause-button.png'))
       Speech.resume()
     }
   }
 
   const getanother = () => {
     Speech.stop()
-    setImagesource(require('../images/pause.png'))
+    setImagesource(require('../images/pause-button.png'))
     SettoSpeak(false);
     axios
       .get("https://curiousmindsbackend.herokuapp.com/article")
