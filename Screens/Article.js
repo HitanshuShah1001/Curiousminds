@@ -16,9 +16,10 @@ import Divider from "../Components/Divider";
 import * as Speech from "expo-speech";
 import { TextSizes } from "../TextContext.js";
 import DropdownComponent from "../Components/Dropdowncomponent";
+import SpeedDropdownComponent from "../Components/SpeedDropdowncomponent";
 
 export default function Article() {
-  const { titleSize, authortextSize, articletextSize,articleColor,pagecolor,language } =
+  const { titleSize, authortextSize, articletextSize,articleColor,pagecolor,language,speakingspeed,setSpeakingspeed } =
     React.useContext(TextSizes);
 
   const [imagesource,setImagesource] = useState(require('../images/pausebluee.png'))
@@ -40,6 +41,9 @@ export default function Article() {
     setImagesource(require('../images/pausebluee.png'))
   },[language])
 
+  // useEffect(() => {
+  // },[])
+
   const Sharearticle = () => {
     Speech.pause()
     setImagesource(require('../images/playblue.png'))
@@ -53,7 +57,7 @@ export default function Article() {
   const Speak = () => {
     SettoSpeak(true);
     const thingtoSay = article;
-    Speech.speak(thingtoSay,{rate:1,pitch:0.7,language:language});
+    Speech.speak(thingtoSay,{rate:speakingspeed,pitch:0.7,language:language});
     Speech.isSpeakingAsync().then(res => {
       console.log(res)
     })
@@ -87,6 +91,7 @@ export default function Article() {
 
   const StopAudio = () => {
     Speech.stop()
+    setImagesource(require('../images/pausebluee.png'))
     SettoSpeak(false);
   }
 
@@ -111,6 +116,7 @@ export default function Article() {
           <Image source={imagesource} style={{height:25,width:25}} />
         </Pressable>
         <DropdownComponent />
+        <SpeedDropdownComponent />
         {/* <DropdownComponent /> */}
         <Pressable onPress={StopAudio}>
           <Image source={require('../images/stop.png')} style={{height:25,width:25}} />
