@@ -30,19 +30,19 @@ const data = [
 ];
 
 const DropdownComponent = () => {
-  const { language,setLanguage} =
+  const { language,setLanguage,pageColor,articleColor} =
     React.useContext(TextSizes);
   const [value, setValue] = useState(language);
   const [isFocus, setIsFocus] = useState(false);
   
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{backgroundColor:pageColor}]}>
       <Dropdown
         style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
+        placeholderStyle={[styles.placeholderStyle,{color:articleColor}]}
+        selectedTextStyle={[styles.selectedTextStyle,{color:articleColor}]}
+        inputSearchStyle={[styles.inputSearchStyle,{color:articleColor}]}
         iconStyle={styles.iconStyle}
         data={data}
         search
@@ -69,7 +69,6 @@ export default DropdownComponent;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
     padding: 10,
     flex:1
   },
@@ -82,15 +81,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 5,
-  },
-  label: {
-    position: 'absolute',
-    backgroundColor: 'white',
-    left: 22,
-    top: 8,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 14,
   },
   placeholderStyle: {
     fontSize: 16,
