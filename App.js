@@ -20,7 +20,7 @@ export default function App() {
   const [articleColor,setArticlecolor] = useState(theme=='Light'?'#000000':'#FFFFFF')
   const [pagecolor,setPagecolor] = useState(theme==='Light'?'#FFFFFF':'#000000')
   const [language,setLanguage] = useState('en-US')
-  const [speakingspeed,setSpeakingspeed] = useState(1.5);
+  const [speakingspeed,setSpeakingspeed] = useState(1);
   values = {titleSize,setTitleSize,authortextSize,setAuthortextSize,articleColor,setArticlecolor,theme,setTheme,pagecolor,setPagecolor,articletextSize,setArticletextSize,
     language,setLanguage,speakingspeed,setSpeakingspeed}
   return (

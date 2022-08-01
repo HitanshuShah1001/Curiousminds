@@ -57,7 +57,7 @@ export default function Article() {
   const Speak = () => {
     SettoSpeak(true);
     const thingtoSay = article;
-    Speech.speak(thingtoSay,{rate:speakingspeed,pitch:0.7,language:language});
+    Speech.speak(thingtoSay,{rate:speakingspeed,pitch:0.85,language:language});
     Speech.isSpeakingAsync().then(res => {
       console.log(res)
     })
@@ -81,11 +81,13 @@ export default function Article() {
     setImagesource(require('../images/pausebluee.png'))
     SettoSpeak(false);
     axios
-      .get("https://curiousmindsbackend.herokuapp.com/article")
+      .get("https://curiousmindsbackend.herokuapp.com/getarticles")
       .then((res) => {
-        setTitle(res.data.title);
-        setAuthor(res.data.author);
-        setArticle(res.data.article);
+        setTitle(res.data.data.curiousarticle.title);
+        setAuthor(res.data.data.curiousarticle.author);
+        setArticle(res.data.data.curiousarticle.article);
+      }).catch(error => {
+        console.log(error.response)
       });
   };
 
