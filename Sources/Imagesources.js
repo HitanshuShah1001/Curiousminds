@@ -1,0 +1,7 @@
+export const PAUSE = require('../images/pausebluee.png')
+export const PLAY = require('../images/playblue.png')
+export const OPEN_BOOK = require('../images/open-book.png')
+export const SETTINGS = require('../images/settings.png')
+export const WRITE = require('../images/pencil.png')
+export const COPY_WRITING = require('../images/copywriting.png')
+export const STOP = require('../images/stop.png')

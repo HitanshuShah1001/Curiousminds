@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Curiousminds",
+    "plugins": ["react-native-email-link"],
     "slug": "Curiousminds",
     "version": "1.0.0",
     "orientation": "portrait",

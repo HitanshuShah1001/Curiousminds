@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import {SafeAreaView,View,Text,TextInput, Button} from 'react-native';
+import {SafeAreaView,View,Text,TextInput, Button, Alert,ScrollView,Pressable} from 'react-native';
+import styles from '../Styles/PostArticleStyles'
 import { TextSizes } from '../TextContext';
 
 export default function PostArticle(){
@@ -12,32 +13,41 @@ export default function PostArticle(){
 
     const postarticle = () => {
         if(title!="" && article!=""){
-        console.log('entering')
         axios.post('https://curiousmindsbackend.herokuapp.com/addarticle',{
             title:title,
             author:author,
             article:article
         }).then(res => {
-            console.log(res)
+            Alert.alert('Article under review,will be added shortly!');
+            setTitle("");
+            setAuthor("");
+            setArticle("");
+        }).catch(error => {
+            Alert.alert('Error',error)
         })
     }
     }
     return (
         <SafeAreaView style={{flex:1,backgroundColor:pagecolor}}>
-            {/* <View style={{flex:0.1,backgroundColor:'red'}}>
-                <Text>Write</Text>
-            </View> */}
-            <View style={{paddingHorizontal:15,flex:1}}>
-            <Text style={{fontSize:20,fontWeight:'600',paddingLeft:10}}>Title</Text>
-            <TextInput style={{height:50,backgroundColor:'#efefef',borderRadius:20,marginTop:10,paddingLeft:10}} value={title} onChangeText={(text) => setTitle(text)} />
-            <Text style={{fontSize:20,fontWeight:'600',paddingLeft:10,marginTop:20}}>Author</Text>
-            <TextInput style={{height:50,backgroundColor:'#efefef',borderRadius:20,marginTop:10,paddingLeft:10}} onChangeText={(text) => setAuthor(text)} />
+            <ScrollView>
+            <View style={styles.container}>
+            <Text style={[styles.shareyourthoughts,{color:articleColor}]}>Share your thoughts</Text>
+            <Text style={[styles.title,{color:articleColor}]}>Title</Text>
+            <TextInput style={styles.input} value={title} placeholder="Day summarised in a word " onChangeText={(text) => setTitle(text)} />
+            <Text style={[styles.author,{color:articleColor}]}>Author</Text>
+            <TextInput style={styles.input} placeholder="I prefer to be Anonymous" onChangeText={(text) => setAuthor(text)} />
             </View>
-            <View style={{paddingHorizontal:15,flex:2}}>
-            <Text style={{fontSize:20,fontWeight:'600',paddingLeft:10,marginTop:20}}>Article/thoughts</Text>
-            <TextInput style={{height:'80%',backgroundColor:'#efefef',borderRadius:20,paddingHorizontal:10,paddingVertical:10}} textAlignVertical="top" multiline={true} onChangeText={(text) => setArticle(text)}/>
-            <Button title='Post' onPress={postarticle} />
+            <View style={styles.articlecontainer}>
+            <Text style={{fontSize:20,fontWeight:'600',paddingLeft:10,marginTop:20,color:articleColor}}>Article/thoughts</Text>
+            <TextInput style={styles.article} textAlignVertical="top" multiline={true} onChangeText={(text) => setArticle(text)} placeholder = "Pour your heart out,Everyone's listening!"  value={article}/>
+            <Pressable onPress={postarticle} style={styles.pressablestyle}>
+                <View style={styles.buttonContainer}>
+                    <Text style={styles.buttontextstyle}>Share it with the world!</Text>
+                </View>
+            </Pressable>
+
             </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }

@@ -8,7 +8,8 @@ import {
   Button,
   Share,
   Pressable,
-  Image
+  Image,
+  Alert
 } from "react-native";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -16,29 +17,33 @@ import Divider from "../Components/Divider";
 import * as Speech from "expo-speech";
 import { TextSizes } from "../TextContext.js";
 import DropdownComponent from "../Components/Dropdowncomponent";
-import SpeedDropdownComponent from "../Components/SpeedDropdowncomponent";
-
+import BetaListen from "../Components/BetaListen";
+import styles from '../Styles/ArticleStyles';
+import { PAUSE,PLAY, STOP } from "../Sources/Imagesources";
 export default function Article() {
   const { titleSize, authortextSize, articletextSize,articleColor,pagecolor,language,speakingspeed,setSpeakingspeed } =
     React.useContext(TextSizes);
 
-  const [imagesource,setImagesource] = useState(require('../images/pausebluee.png'))
+  const [imagesource,setImagesource] = useState(PAUSE)
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [article, setArticle] = useState("");
+  const [loading,setLoading] = useState(false);
   const [tospeak, SettoSpeak] = useState(false);
-  console.log(language,'langauge');
+  const [visible,setVisible] = useState(false);
   useEffect(() => {
-    getanother();
-    // Speech.getAvailableVoicesAsync().then(res => {
-    //   console.log(res)
-    // })
+    getarticle();
   }, []);
 
   useEffect(() => {
-    Speech.stop()
-    Speech.speak(article,{language:language})
-    setImagesource(require('../images/pausebluee.png'))
+    Speech.isSpeakingAsync().then(res => {
+      if(res === true){
+        Speech.stop()
+        Speech.speak(article,{language:language})
+        setImagesource(PAUSE)
+      }
+    })
+    
   },[language])
 
   // useEffect(() => {
@@ -46,121 +51,95 @@ export default function Article() {
 
   const Sharearticle = () => {
     Speech.pause()
-    setImagesource(require('../images/playblue.png'))
+    setImagesource(PLAY)
     Share.share({
-      message: article.toString(),
+      message: title.toString() + '\n' + author.toString() + '\n' + article.toString(),
     })
-      .then((result) => console.log(result))
-      .catch((error) => console.log(error));
+      .then((result) => Alert.alert('Article shared!'))
+      .catch((error) => Alert.alert(error));
   };
 
   const Speak = () => {
+    setVisible(false);
     SettoSpeak(true);
     const thingtoSay = article;
     Speech.speak(thingtoSay,{rate:speakingspeed,pitch:0.85,language:language});
-    Speech.isSpeakingAsync().then(res => {
-      console.log(res)
-    })
   };
 
 
 
   const CheckStatus = () => {
-    if(imagesource===require('../images/pausebluee.png')){
-      setImagesource(require('../images/playblue.png'))
+    if(imagesource===PAUSE){
+      setImagesource(PLAY)
       Speech.pause()
     }
     else{
-      setImagesource(require('../images/pausebluee.png'))
+      setImagesource(PAUSE)
       Speech.resume()
     }
   }
 
-  const getanother = () => {
+  const getarticle = () => {
+    setLoading(true);
     Speech.stop()
-    setImagesource(require('../images/pausebluee.png'))
+    setImagesource(PAUSE)
     SettoSpeak(false);
     axios
       .get("https://curiousmindsbackend.herokuapp.com/getarticles")
       .then((res) => {
+        setLoading(false);
         setTitle(res.data.data.curiousarticle.title);
         setAuthor(res.data.data.curiousarticle.author);
         setArticle(res.data.data.curiousarticle.article);
       }).catch(error => {
-        console.log(error.response)
+        Alert.alert(error.response)
       });
   };
 
   const StopAudio = () => {
     Speech.stop()
-    setImagesource(require('../images/pausebluee.png'))
+    setImagesource(PAUSE)
     SettoSpeak(false);
   }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: pagecolor }}>
+      <BetaListen visible={visible} click={Speak}/>
       <View
-        style={{
-          flex: 0.1,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          paddingHorizontal: 10,
-          alignItems:'center'
-        }}
+        style={styles.header}
       >
-        <Button title="Listen " onPress={Speak} />
-        <Button title={`Read another`} onPress={getanother} />
+        <Button title="Listen " onPress={() => setVisible(true)} />
+        <Button title={`Read another`} onPress={getarticle} />
         <Button title="Share " onPress={Sharearticle} />
       </View>
-      {tospeak && <View style={{ flexDirection: "row", flex: 0.1,paddingHorizontal:15,flexDirection:'row',justifyContent:'space-between',alignItems:'center' }}>
-        {/* <Button title="Pause" onPress={Pausespeech} /> */}
+      {tospeak && <View style={styles.listencontainer}>
         <Pressable onPress={CheckStatus}>
-          <Image source={imagesource} style={{height:25,width:25}} />
+          <Image source={imagesource} style={styles.image} />
         </Pressable>
         <DropdownComponent />
-        <SpeedDropdownComponent />
+        {/* <SpeedDropdownComponent /> */}
         {/* <DropdownComponent /> */}
         <Pressable onPress={StopAudio}>
-          <Image source={require('../images/stop.png')} style={{height:25,width:25}} />
+          <Image source={STOP} style={styles.image} />
         </Pressable>
         </View>}
-      {article == "" && <ActivityIndicator size={"large"} />}
+      {(article == "" || loading) && <ActivityIndicator size={"large"} />}
       {article != "" && (
         <ScrollView style={{ flex: 1.5 }}>
           <Text
-            style={{
-              paddingHorizontal: 15,
-              fontSize: titleSize,
-              fontWeight: "700",
-              alignSelf: "flex-start",
-              color: articleColor,
-            }}
+            style={[styles.title,{color:articleColor,fontSize:titleSize}]}
           >
             {title}
           </Text>
           <Divider />
           <Text
-            style={{
-              paddingHorizontal: 10,
-              fontSize: authortextSize,
-              fontWeight: "600",
-              alignSelf: "flex-end",
-              marginTop: 20,
-              color: articleColor,
-            }}
+            style={[styles.author,{color:articleColor,fontSize:authortextSize}]}
           >
-            {" "}
+            
             By :- {author}
           </Text>
           <Text
-            style={{
-              paddingHorizontal: 15,
-              alignSelf: "center",
-              marginTop: 20,
-              fontSize: articletextSize,
-              letterSpacing: 2,
-              color: articleColor,
-            }}
+            style={[styles.article,{color:articleColor,fontSize:articletextSize}]}
           >
             {article}
           </Text>

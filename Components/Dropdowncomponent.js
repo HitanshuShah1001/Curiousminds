@@ -2,32 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { TextSizes } from "../TextContext.js";
-
-const data = [
-  { label: 'Arabic ', value: 'ar-SA' },
-  { label: 'Czech', value: 'cs-CZ' },
-  { label: 'Danish', value: 'da-DK' },
-  { label: 'German', value: 'de-DE' },
-  { label: 'Modern Greek', value: 'el-GR' },
-  { label: 'English(Aus)', value: 'en-AU' },
-  { label: 'English(UK)', value: 'en-GB' },
-  { label: 'English(Irish)', value: 'en-IE' },
-  { label: 'English(US) ', value: 'en-US' },
-  { label: 'Spanish(Spain)', value: 'es-ES' },
-  { label: 'Spanish(Mexico)', value: 'es-MX' },
-  { label: 'Finnish', value: 'fi-FI' },
-  { label: 'French(Canada)', value: 'fr-CA' },
-  { label: 'French(France)', value: 'fr-FR' },
-  { label: 'Hebrew(Israel)', value: 'he-IL' },
-  { label: 'Hindi', value: 'hi-IN' },
-  { label: 'Hungarian ', value: 'hu-HU' },
-  { label: 'Indonesian', value: 'id-ID' },
-  { label: 'Italian', value: 'it-IT' },
-  { label: 'Japanese', value: 'ja-JP' },
-  { label: 'Korean', value: 'ko-KR' },
-  { label: 'Dutch(Belgium)', value: 'nl-BE' },
-  { label: 'Dutch(Netherlands', value: 'nl-NL' },
-];
+import languages from '../Data/Languages'
 
 const DropdownComponent = () => {
   const { language,setLanguage,pageColor,articleColor} =
@@ -44,7 +19,7 @@ const DropdownComponent = () => {
         selectedTextStyle={[styles.selectedTextStyle,{color:articleColor}]}
         inputSearchStyle={[styles.inputSearchStyle,{color:articleColor}]}
         iconStyle={styles.iconStyle}
-        data={data}
+        data={languages}
         search
         maxHeight={300}
         labelField="label"

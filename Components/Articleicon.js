@@ -1,8 +1,8 @@
-import {View,Image} from 'react-native';
-
+import {Image} from 'react-native';
+import { OPEN_BOOK } from '../Sources/Imagesources';
 
 export const Articleicon= () => {
     return (
-        <Image source={require('../images/open-book.png')} style={{height:20,width:20}} />
+        <Image source={OPEN_BOOK} style={{height:20,width:20}} />
     )
 };

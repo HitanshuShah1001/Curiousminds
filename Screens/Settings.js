@@ -1,10 +1,12 @@
 import React,{useState} from "react";
-import { SafeAreaView, View, Text, Switch } from "react-native";
+import { SafeAreaView, View, Text, Switch,Pressable,Linking } from "react-native";
 import SettingsLabel from "../Components/Settings";
 import { TextSizes } from "../TextContext.js";
 import Selecttextsize from "../Components/Selecttextsize";
 import Selectauthorsize from "../Components/SelectAuthorsize";
 import Selectarticlesize from "../Components/SelectArticlesize";
+import styles from "../Styles/Settingsstyle";
+import { openComposer } from "react-native-email-link";
 export default function Settings() {
   const {
     articleColor,
@@ -38,12 +40,7 @@ export default function Settings() {
         <Selectauthorsize />
         <Selectarticlesize />
         <View
-          style={{
-            flexDirection: "row",
-            paddingHorizontal: 18,
-            justifyContent: "space-between",
-            marginTop: 20,
-          }}
+          style={styles.switchcontainer}
         >
           <Text style={{ fontSize: 18, fontWeight: "600",color:articleColor }}>Dark Mode</Text>
           <Switch
@@ -51,6 +48,11 @@ export default function Settings() {
             onValueChange={changeTheme}
             value={on}
           />
+        </View>
+        <View style={{marginTop:20,paddingHorizontal:18}}>
+          <Pressable onPress={() =>  openComposer({to:'hitanshushah5@gmail.com'})}>
+          <Text style={{fontSize: 16, fontWeight: "600",color:articleColor,textDecorationLine:'underline'}}>Contact Us</Text>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>

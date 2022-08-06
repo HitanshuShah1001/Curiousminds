@@ -5510,6 +5510,11 @@ react-native-element-dropdown@^2.1.0:
   resolved "https://registry.yarnpkg.com/react-native-element-dropdown/-/react-native-element-dropdown-2.1.0.tgz#a13c544798e2d889e076a917f7980d090b62541a"
   integrity sha512-y6s+MANhVy2HIfsnrHh1pVMVu9aXUPcxWH7GuCJ12W+iJiBdzmyyKYNWl37b/9IJHbsIpDyiFlCFwj21VBANeA==
 
+react-native-email-link@^1.14.1:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/react-native-email-link/-/react-native-email-link-1.14.1.tgz#3d1a9512064f904e43359df70bbcac9547210652"
+  integrity sha512-MdyQJ9K1toc2L/62SX5TXwOIt0GsUs+f12ygNZF13zJe5x0DiwAsyXC1ZFTYxDXJ5JFktdl4ANogl0n/p9ysug==
+
 react-native-gesture-handler@~2.2.1:
   version "2.2.1"
   resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.2.1.tgz"
