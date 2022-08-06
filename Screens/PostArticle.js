@@ -10,7 +10,6 @@ export default function PostArticle(){
     const [author,setAuthor] = useState("Anonymous")
     const [article,setArticle] = useState("");
 
-
     const postarticle = () => {
         if(title!="" && article!=""){
         axios.post('https://curiousmindsbackend.herokuapp.com/addarticle',{
@@ -25,6 +24,10 @@ export default function PostArticle(){
         }).catch(error => {
             Alert.alert('Error',error)
         })
+    }
+    else
+    {
+        Alert.alert('Title and article should not be left empty')   
     }
     }
     return (

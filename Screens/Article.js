@@ -30,7 +30,6 @@ export default function Article() {
   const [article, setArticle] = useState("");
   const [loading,setLoading] = useState(false);
   const [tospeak, SettoSpeak] = useState(false);
-  const [visible,setVisible] = useState(false);
   useEffect(() => {
     getarticle();
   }, []);
@@ -55,12 +54,10 @@ export default function Article() {
     Share.share({
       message: title.toString() + '\n' + author.toString() + '\n' + article.toString(),
     })
-      .then((result) => Alert.alert('Article shared!'))
       .catch((error) => Alert.alert(error));
   };
 
   const Speak = () => {
-    setVisible(false);
     SettoSpeak(true);
     const thingtoSay = article;
     Speech.speak(thingtoSay,{rate:speakingspeed,pitch:0.85,language:language});
@@ -104,11 +101,10 @@ export default function Article() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: pagecolor }}>
-      <BetaListen visible={visible} click={Speak}/>
       <View
         style={styles.header}
       >
-        <Button title="Listen " onPress={() => setVisible(true)} />
+        <Button title="Listen " onPress={Speak} />
         <Button title={`Read another`} onPress={getarticle} />
         <Button title="Share " onPress={Sharearticle} />
       </View>

@@ -1,13 +1,14 @@
 {
   "expo": {
     "name": "Curiousminds",
-    "plugins": ["react-native-email-link"],
+    "plugins": [
+      "react-native-email-link"
+    ],
     "slug": "Curiousminds",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -21,7 +22,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "bundleIdentifier": "com.hitz2001.Curiousminds"
     },
     "android": {
       "adaptiveIcon": {
