@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   articlecontainer: {
     paddingHorizontal: 15,
-    flex: 2.3,
+    flex: 2,
   },
   article: {
     height: "80%",
@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 10,
-    minHeight: 400,
+    marginTop: 10,
+    minHeight: 270,
   },
   buttontextstyle: {
   color:'white',
@@ -50,6 +51,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     height:40,
     width:190,
+    backgroundColor:'#FF7F50',
+    borderRadius:20,
+    justifyContent:'center'
+  },
+  keyboardbuttonContainer: {
+    height:40,
+    width:120,
     backgroundColor:'#FF7F50',
     borderRadius:20,
     justifyContent:'center'

@@ -8,6 +8,7 @@ import { TextSizes } from './TextContext';
 import { Articleicon } from './Components/Articleicon';
 import { Settingsicon } from './Components/Settingsicon';
 import { Writeicon } from './Components/WriteIcon';
+import InternetConnectionAlert from "react-native-internet-connection-alert";
 
 const Tab = createMaterialBottomTabNavigator();
 

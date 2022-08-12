@@ -17,8 +17,8 @@ import Divider from "../Components/Divider";
 import * as Speech from "expo-speech";
 import { TextSizes } from "../TextContext.js";
 import DropdownComponent from "../Components/Dropdowncomponent";
-import BetaListen from "../Components/BetaListen";
 import styles from '../Styles/ArticleStyles';
+import InternetConnectionAlert from "react-native-internet-connection-alert";
 import { PAUSE,PLAY, STOP } from "../Sources/Imagesources";
 export default function Article() {
   const { titleSize, authortextSize, articletextSize,articleColor,pagecolor,language,speakingspeed,setSpeakingspeed } =
@@ -100,6 +100,7 @@ export default function Article() {
   }
 
   return (
+    <InternetConnectionAlert>
     <SafeAreaView style={{ flex: 1, backgroundColor: pagecolor }}>
       <View
         style={styles.header}
@@ -142,5 +143,6 @@ export default function Article() {
         </ScrollView>
       )}
     </SafeAreaView>
+    </InternetConnectionAlert>
   );
 }
