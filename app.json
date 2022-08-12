@@ -5,7 +5,7 @@
       "react-native-email-link"
     ],
     "slug": "Curiousminds",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/CuriousMinds.png",
     "userInterfaceStyle": "automatic",
